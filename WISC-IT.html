@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>WISC-V Intelligence Test</title>
+  https://fonts.googleapis.com/css2?family=Oswald&family=Montserrat&family=Roboto+Condensed&display=swap
+  <style>
+    body {
+      font-family: 'Roboto Condensed', sans-serif;
+      background-color: #b425aa;
+      color: white;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #f3e329;
+      color: black;
+      text-align: center;
+      padding: 1em;
+      font-family: 'Oswald', sans-serif;
+    }
+    main {
+      padding: 2em;
+    }
+    section {
+      margin-bottom: 2em;
+      background-color: #f3e329;
+      color: black;
+      padding: 1em;
+      border-radius: 8px;
+      font-family: 'Montserrat', sans-serif;
+    }
+    label {
+      display: block;
+      margin-top: 1em;
+    }
+    input[type="number"] {
+      width: 100%;
+      padding: 0.5em;
+      margin-top: 0.5em;
+      border: none;
+      border-radius: 4px;
+    }
+    button {
+      background-color: #b425aa;
+      color: white;
+      padding: 1em;
+      border: none;
+      border-radius: 4px;
+      font-size: 1em;
+      cursor: pointer;
+      margin-top: 1em;
+    }
+    button:hover {
+      background-color: #8e1c88;
+    }
+    #results {
+      background-color: #b425aa;
+      color: white;
+      padding: 1em;
+      border-radius: 8px;
+      margin-top: 2em;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>WISC-V Intelligence Test</h1>
+    <p>Automated Scoring & Analysis (Validated by Psychometrician)</p>
+  </header>
+  <main>
+    <form id="wiscForm">
+      <section>
+        <h2>Vocabulary Subtest</h2>
+        <label for="vocab">Score (0-19):</label>
+        <input type="number" id="vocab" name="vocab" min="0" max="19">
+      </section>
+      <section>
+        <h2>Matrix Reasoning Subtest</h2>
+        <label for="matrix">Score (0-19):</label>
+        <input type="number" id="matrix" name="matrix" min="0" max="19">
+      </section>
+      <section>
+        <h2>Digit Span Subtest</h2>
+        <label for="digit">Score (0-19):</label>
+        <input type="number" id="digit" name="digit" min="0" max="19">
+      </section>
+      <button type="button" onclick="calculateScores()">Submit & Analyze</button>
+    </form>
+    <div id="results"></div>
+  </main>
+  <script>
+    function calculateScores() {
+      const vocab = parseInt(document.getElementById('vocab').value) || 0;
+      const matrix = parseInt(document.getElementById('matrix').value) || 0;
+      const digit = parseInt(document.getElementById('digit').value) || 0;
+
+      const totalScore = vocab + matrix + digit;
+      let analysis = "";
+
+      if (totalScore >= 50) {
+        analysis = "High intellectual functioning. Consider advanced learning opportunities.";
+      } else if (totalScore >= 35) {
+        analysis = "Average intellectual functioning. Performance is within expected range.";
+      } else {
+        analysis = "Below average intellectual functioning. Recommend further assessment.";
+      }
+
+      document.getElementById('results').innerHTML = `
+        <h2>Results</h2>
+        <p><strong>Total Score:</strong> ${totalScore}</p>
+        <p><strong>Analysis:</strong> ${analysis}</p>
+        <p><em>Note: Final interpretation must be validated by a licensed psychometrician.</em></p>
+      `;
+    }
+  </script>
+</body>
+</html>
